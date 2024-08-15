@@ -14,8 +14,9 @@ const Header = () => {
   };
   const [val, setVal] = useState('');
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (val.trim()) {
-      router.push(`/search/?query=${encodeURIComponent(val)}`);
+      router.push(`/search/?query=${val}`);
     }
   };
   return (
