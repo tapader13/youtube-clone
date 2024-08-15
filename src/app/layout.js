@@ -23,12 +23,12 @@ export default function RootLayout({ children }) {
           >
             {' '}
             <Header />
-          </Suspense>
-          <div className='w-screen flex'>
-            <Sidebar />
+            <div className='w-screen flex'>
+              <Sidebar />
 
-            {children}
-          </div>
+              {children}
+            </div>
+          </Suspense>
         </AppContext>
       </body>
     </html>
