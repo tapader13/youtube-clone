@@ -3,15 +3,34 @@ import Link from 'next/link';
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-const Card = ({ data }) => {
+const Card = ({ data, identity, identity2 }) => {
   return (
     data.type === 'video' && (
-      <div className='w-[32%] mb-2 cursor-pointer group transition-all duration-200 ease-in-out overflow-hidden'>
-        <Link href={`video/details/${data?.videoId}`}>
+      <div
+        className={`${
+          identity === 'related' ? 'w-[100%] ' : 'w-[32%] '
+        } mb-2 cursor-pointer group  transition-all duration-200 ease-in-out overflow-hidden`}
+      >
+        <Link
+          href={`/video/details/${data?.videoId}`}
+          className={`${
+            identity === 'related' ? ' flex-row' : ' flex-col'
+          } flex`}
+        >
           {' '}
-          <div className='relative h-52 text-white group-hover:scale-105 transition-transform duration-300 ease-in-out w-full'>
+          <div
+            className={`relative ${
+              identity === 'related'
+                ? identity2 === 'search'
+                  ? 'h-64 w-[40%]'
+                  : 'h-32 w-[40%]'
+                : 'h-52 w-full'
+            } text-white group-hover:scale-105 transition-transform duration-300 ease-in-out `}
+          >
             <LazyLoadImage
-              className=' absolute top-0 left-0 h-full w-full object-cover'
+              className={`absolute top-0 left-0 h-full ${
+                identity === 'related' ? 'w-full' : 'w-full'
+              } object-cover`}
               alt={data?.title}
               effect='black-and-white'
               src={data?.thumbnail[0]?.url}
@@ -20,13 +39,19 @@ const Card = ({ data }) => {
               {data?.lengthText}
             </span>
           </div>
-          <div className='flex items-start gap-2 mt-2'>
+          <div
+            className={`flex items-start gap-2 mt-2 ${
+              identity === 'related' ? 'w-[60%]' : ''
+            }`}
+          >
             <div className='h-10 w-12 rounded-full overflow-hidden'>
-              <img
-                className='h-full w-full'
-                src={data?.channelThumbnail?.[0]?.url || ''}
-                alt={data?.description}
-              />
+              {!identity && (
+                <img
+                  className='h-full w-full'
+                  src={data?.channelThumbnail?.[0]?.url || ''}
+                  alt={data?.description}
+                />
+              )}
             </div>
             <div>
               <h2>{data?.title}</h2>

@@ -1,6 +1,5 @@
 'use client';
 import { fetchDataFromSrcNew } from '@/lib/api';
-import { useRouter } from 'next/navigation';
 import React, { createContext, useEffect, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 export const Context = createContext();
@@ -11,7 +10,7 @@ const AppContext = (props) => {
   const [data, setData] = useState([]);
   const [toggles, setToggles] = useState(false);
   const [progress, setProgress] = useState(30);
-  const router = useRouter();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,7 +19,7 @@ const AppContext = (props) => {
         const fetchedData = await fetchDataFromSrcNew(api);
         setData(fetchedData);
         setProgress(100);
-        router.push('/');
+
         // console.log(fetchedData);
       } catch (error) {
         console.error('Error fetching data:', error);

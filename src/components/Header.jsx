@@ -1,14 +1,22 @@
 'use client';
 import Image from 'next/image';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { FaMicrophone, FaSearch, FaBell } from 'react-icons/fa';
 import { Input } from '@/components/ui/input';
 import { Context } from '@/context/AppContext';
+import { useRouter } from 'next/navigation';
 const Header = () => {
   const context = useContext(Context);
+  const router = useRouter();
   const handleToggle = () => {
     context.setToggles(!context.toggles);
+  };
+  const [val, setVal] = useState('');
+  const handleSubmit = (e) => {
+    if (val.trim()) {
+      router.push(`/search/?query=${encodeURIComponent(val)}`);
+    }
   };
   return (
     <div className=' py-3 fixed top-0 w-screen z-10 bg-black '>
@@ -32,10 +40,19 @@ const Header = () => {
           </div>
         </div>
         <div className=' justify-self-center flex items-center w-full gap-5'>
-          <div className='flex items-center w-full'>
-            <Input placeholder='Search' />
+          <form
+            action=''
+            onSubmit={handleSubmit}
+            className='flex items-center w-full'
+          >
+            <Input
+              placeholder='Search'
+              value={val}
+              onChange={(e) => setVal(e.target.value)}
+            />
             <FaSearch className='text-4xl text-gray-400 bg-slate-700/45 cursor-pointer h-12 w-14 py-2 px-4 rounded-r-full' />
-          </div>
+          </form>
+
           <div className=' h-12 w-14'>
             <FaMicrophone className='text-gray-400 bg-slate-700/45 text-4xl p-2 rounded-full  w-full h-full cursor-pointer' />
           </div>

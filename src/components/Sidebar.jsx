@@ -3,11 +3,14 @@ import React, { useContext } from 'react';
 import { sidebarItems } from '@/lib/data';
 import { Button } from './ui/button';
 import { Context } from '@/context/AppContext';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
+  const router = useRouter();
   const context = useContext(Context);
   const handleButton = (name) => {
     context.setSelectCatagory(name);
+    router.push('/');
   };
   console.log(context.toggles);
 
