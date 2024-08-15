@@ -5,24 +5,26 @@ import { fetchSearchData } from '@/lib/api';
 import React, { useContext, useEffect, useState } from 'react';
 
 const SearchVIdeo = () => {
-  const params = new URLSearchParams(window.location.search);
-  const router = params.get('query');
   const [data, setData] = useState([]);
   const context = useContext(Context);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        context.setProgress(30);
-        const fetchedData = await fetchSearchData(router);
-        setData(fetchedData.data);
-        context.setProgress(100);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+    const params = new URLSearchParams(window.location.search);
+    const router = params.get('query');
+    if (router) {
+      const fetchData = async () => {
+        try {
+          context.setProgress(30);
+          const fetchedData = await fetchSearchData(router);
+          setData(fetchedData.data);
+          context.setProgress(100);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
 
-    fetchData();
-  }, [router]);
+      fetchData();
+    }
+  }, []);
   console.log(data, 'srda');
   return (
     <div
