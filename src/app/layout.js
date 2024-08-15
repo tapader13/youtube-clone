@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 
 import Sidebar from '@/components/Sidebar';
 import AppContext from '@/context/AppContext';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +18,12 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={inter.className}>
         <AppContext>
-          <Header />
+          <Suspense
+            fallback={<div className='text-white pt-[75px]'>Loading...</div>}
+          >
+            {' '}
+            <Header />
+          </Suspense>
           <div className='w-screen flex'>
             <Sidebar />
 
