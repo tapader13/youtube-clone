@@ -2,12 +2,12 @@
 import Card from '@/components/Card';
 import { Context } from '@/context/AppContext';
 import { fetchSearchData } from '@/lib/api';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 
 const SearchVIdeo = () => {
-  const searchParams = useSearchParams();
-  const router = searchParams.get('query');
+  const rt = useRouter();
+  const router = rt.query.query;
   const [data, setData] = useState([]);
   const context = useContext(Context);
   useEffect(() => {
