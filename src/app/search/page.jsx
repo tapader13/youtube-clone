@@ -25,7 +25,7 @@ const SearchVIdeo = () => {
 
     fetchData();
   }, [search]);
-  console.log(data, 'srda');
+
   return (
     <Suspense fallback={<div className='text-white pt-[75px]'>Loading...</div>}>
       <div

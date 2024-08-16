@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Shorts = ({ val }) => {
-  console.log(val, 'sh');
   return (
     <div className='w-[19%] h-auto'>
       <div>

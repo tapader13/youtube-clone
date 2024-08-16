@@ -1,6 +1,6 @@
 import axios from 'axios';
 const base_url = 'https://yt-api.p.rapidapi.com';
-const apikey = 'ce95d8b152msha3f02ca425dd456p1fbe74jsnac4dfa31160a';
+const apikey = '451a6749ccmsh014af1deadbfdc2p12051djsnf657df3b0ac2';
 const options = {
   method: 'GET',
   headers: {
@@ -120,6 +120,44 @@ export const fetchChannelShorts = async (id) => {
   const options = {
     method: 'GET',
     url: `${base_url}/channel/shorts`,
+    params: { id: id },
+    headers: {
+      'x-rapidapi-key': apikey,
+      'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    return await response.data;
+  } catch (error) {
+    throw new Error(`Error fetching data from source: ${error.message}`);
+  }
+};
+
+export const fetchChannelPlaylist = async (id) => {
+  const options = {
+    method: 'GET',
+    url: `${base_url}/channel/playlists`,
+    params: { id: id },
+    headers: {
+      'x-rapidapi-key': apikey,
+      'x-rapidapi-host': 'yt-api.p.rapidapi.com',
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    return await response.data;
+  } catch (error) {
+    throw new Error(`Error fetching data from source: ${error.message}`);
+  }
+};
+
+export const fetchChannelPlaylistVideo = async (id) => {
+  const options = {
+    method: 'GET',
+    url: `${base_url}/playlist`,
     params: { id: id },
     headers: {
       'x-rapidapi-key': apikey,

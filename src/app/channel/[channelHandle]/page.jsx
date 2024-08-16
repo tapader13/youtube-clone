@@ -1,16 +1,23 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Context } from '@/context/AppContext';
-import { fetchChannelHome, fetchChannelShorts } from '@/lib/api';
+import {
+  fetchChannelHome,
+  fetchChannelPlaylist,
+  fetchChannelShorts,
+} from '@/lib/api';
 import React, { useContext, useEffect, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Card from '@/components/Card';
 import Shorts from '@/components/Shorts';
+import Playlist from '@/components/Playlist';
 
 const ChannelHandle = ({ params }) => {
   const context = useContext(Context);
   const [data, setData] = React.useState(null);
   const [shorts, setShorts] = useState(null);
+  const [playlists, setPlaylists] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,10 +39,20 @@ const ChannelHandle = ({ params }) => {
         console.error('Error fetching data:', error);
       }
     };
+    const fetchPlaylist = async () => {
+      try {
+        context.setProgress(30);
+        const fetchedData = await fetchChannelPlaylist(params.channelHandle);
+        setPlaylists(fetchedData);
+        context.setProgress(100);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchData();
     fetchShorts();
+    fetchPlaylist();
   }, []);
-  console.log(shorts, 'done');
   return (
     <div
       className={`${
@@ -119,8 +136,18 @@ const ChannelHandle = ({ params }) => {
           <TabsContent value={'Shorts'} className='flex px-5 flex-wrap gap-3'>
             {shorts?.data?.map((val, i) => {
               if (val.type === 'shorts') {
-                console.log(val, 'chk');
                 return <Shorts key={i} val={val} />;
+              }
+              return null;
+            })}
+          </TabsContent>
+          <TabsContent
+            value={'Playlists'}
+            className='flex px-5 flex-wrap gap-3'
+          >
+            {playlists?.data?.map((val, i) => {
+              if (val.type === 'playlist') {
+                return <Playlist key={i} val={val} />;
               }
               return null;
             })}
