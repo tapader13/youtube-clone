@@ -28,7 +28,7 @@ const AppContext = (props) => {
 
     fetchData();
   }, [endPoint, selectCatagory]);
-
+  console.log(data, 'done');
   const value = {
     selectCatagory,
     setSelectCatagory,

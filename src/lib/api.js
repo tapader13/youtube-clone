@@ -1,6 +1,6 @@
 import axios from 'axios';
 const base_url = 'https://yt-api.p.rapidapi.com';
-const apikey = '451a6749ccmsh014af1deadbfdc2p12051djsnf657df3b0ac2';
+const apikey = 'ea48882f0emshdaa6840c9ae3a4ap1cfc63jsn63690a461a68';
 const options = {
   method: 'GET',
   headers: {
