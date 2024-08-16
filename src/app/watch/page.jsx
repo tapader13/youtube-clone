@@ -128,6 +128,7 @@ const WatchVideo = () => {
               <PlayListSideBar
                 key={i}
                 val={data}
+                query={plalistId}
                 isActive={parseInt(index) === i + 1}
               />
             ))}
