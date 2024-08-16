@@ -4,9 +4,7 @@ import React from 'react';
 const PlayListSideBar = ({ val, isActive, query }) => {
   return (
     <Link
-      href={`/watch?videoId=${val?.videoId}&pid=${
-        val?.playlistId || query
-      }&index=${val?.index}`}
+      href={`/watch?videoId=${val?.videoId}&pid=${query}&index=${val?.index}`}
     >
       <div
         className={`flex  ${
